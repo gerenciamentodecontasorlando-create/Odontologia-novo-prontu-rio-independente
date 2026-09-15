@@ -1,624 +1,2048 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070b">
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+<title>Odonto Smart</title>
 
-  <meta name="theme-color" content="#05070b">
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,Helvetica,sans-serif;
+}
 
-  <title>Odonto Smart</title>
+:root{
+  --bg:#05070b;
+  --sidebar:#090d14;
+  --card:#101722;
+  --card2:#151e2b;
+  --blue:#1683ff;
+  --blue2:#0066e6;
+  --text:#fff;
+  --muted:#8d9aaa;
+  --border:#202b3a;
+  --danger:#ff4d5a;
+  --success:#29c978;
+}
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+body{
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
 
-    :root {
-      --bg: #05070b;
-      --sidebar: #090d14;
-      --card: #101722;
-      --card2: #151e2b;
-      --blue: #1683ff;
-      --blue2: #0066e6;
-      --text: #ffffff;
-      --muted: #8d9aaa;
-      --border: #202b3a;
-    }
+button,input,select,textarea{
+  font:inherit;
+}
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
+.app{
+  display:flex;
+  min-height:100vh;
+}
 
-    .app {
-      display: flex;
-      min-height: 100vh;
-    }
+/* SIDEBAR */
 
-    /* MENU LATERAL */
+.sidebar{
+  width:270px;
+  background:var(--sidebar);
+  border-right:1px solid var(--border);
+  padding:25px 18px;
+  position:fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  z-index:10;
+}
 
-    .sidebar {
-      width: 270px;
-      background: var(--sidebar);
-      border-right: 1px solid var(--border);
-      padding: 25px 18px;
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-    }
+.logo{
+  margin-bottom:40px;
+  padding:0 10px;
+}
 
-    .logo {
-      margin-bottom: 40px;
-      padding: 0 10px;
-    }
+.logo h1{
+  font-size:24px;
+}
 
-    .logo h1 {
-      font-size: 24px;
-      color: white;
-    }
+.logo span{
+  color:var(--blue);
+}
 
-    .logo span {
-      color: var(--blue);
-    }
+.logo p{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:5px;
+}
 
-    .logo p {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 5px;
-    }
+.menu-button{
+  width:100%;
+  border:none;
+  background:transparent;
+  color:#cbd5e1;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:8px;
+  text-align:left;
+  font-size:15px;
+  cursor:pointer;
+  transition:.2s;
+}
 
-    .menu-button {
-      width: 100%;
-      border: none;
-      background: transparent;
-      color: #cbd5e1;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 8px;
-      text-align: left;
-      font-size: 15px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+.menu-button:hover,
+.menu-button.active{
+  background:var(--blue);
+  color:white;
+}
 
-    .menu-button:hover,
-    .menu-button.active {
-      background: var(--blue);
-      color: white;
-    }
+/* CONTEÚDO */
 
-    /* CONTEÚDO */
+.content{
+  margin-left:270px;
+  width:calc(100% - 270px);
+  padding:35px;
+}
 
-    .content {
-      margin-left: 270px;
-      width: calc(100% - 270px);
-      padding: 35px;
-    }
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:35px;
+}
 
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 35px;
-    }
+.topbar h2{
+  font-size:27px;
+}
 
-    .topbar h2 {
-      font-size: 27px;
-    }
+.topbar p{
+  color:var(--muted);
+  margin-top:5px;
+}
 
-    .topbar p {
-      color: var(--muted);
-      margin-top: 5px;
-    }
+.profile{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:10px 16px;
+  border-radius:10px;
+}
 
-    .profile {
-      background: var(--card);
-      border: 1px solid var(--border);
-      padding: 10px 16px;
-      border-radius: 10px;
-    }
+/* HOME */
 
-    /* DASHBOARD */
+.welcome{
+  background:linear-gradient(120deg,#0b1626,#07101c);
+  border:1px solid #162b46;
+  border-radius:18px;
+  padding:30px;
+  margin-bottom:30px;
+}
 
-    .welcome {
-      background:
-        linear-gradient(120deg, #0b1626, #07101c);
-      border: 1px solid #162b46;
-      border-radius: 18px;
-      padding: 30px;
-      margin-bottom: 30px;
-    }
+.welcome h3{
+  font-size:25px;
+  margin-bottom:10px;
+}
 
-    .welcome h3 {
-      font-size: 25px;
-      margin-bottom: 10px;
-    }
+.welcome p{
+  color:var(--muted);
+  max-width:700px;
+  line-height:1.5;
+}
 
-    .welcome p {
-      color: var(--muted);
-      max-width: 700px;
-      line-height: 1.5;
-    }
+.cards{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(250px,1fr));
+  gap:20px;
+}
 
-    .cards {
-      display: grid;
-      grid-template-columns:
-        repeat(2, minmax(250px, 1fr));
-      gap: 20px;
-    }
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:25px;
+  cursor:pointer;
+  transition:.25s;
+  min-height:190px;
+}
 
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 25px;
-      cursor: pointer;
-      transition: 0.25s;
-      min-height: 190px;
-    }
+.card:hover{
+  transform:translateY(-4px);
+  border-color:var(--blue);
+  background:var(--card2);
+}
 
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: var(--blue);
-      background: var(--card2);
-    }
+.icon{
+  width:48px;
+  height:48px;
+  background:var(--blue);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:12px;
+  font-size:23px;
+  margin-bottom:20px;
+}
 
-    .icon {
-      width: 48px;
-      height: 48px;
-      background: var(--blue);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 12px;
-      font-size: 23px;
-      margin-bottom: 20px;
-    }
+.card h3{
+  margin-bottom:10px;
+  font-size:19px;
+}
 
-    .card h3 {
-      margin-bottom: 10px;
-      font-size: 19px;
-    }
+.card p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.5;
+}
 
-    .card p {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.5;
-    }
+.tag{
+  display:inline-block;
+  margin-top:18px;
+  color:#62aaff;
+  font-size:13px;
+}
 
-    .tag {
-      display: inline-block;
-      margin-top: 18px;
-      color: #62aaff;
-      font-size: 13px;
-    }
+.screen{
+  display:none;
+}
 
-    /* TELAS */
+.screen.active{
+  display:block;
+}
 
-    .screen {
-      display: none;
-    }
+.module-box{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:25px;
+  border-radius:16px;
+}
 
-    .screen.active {
-      display: block;
-    }
+.module-box h3{
+  margin-bottom:10px;
+}
 
-    .module-box {
-      background: var(--card);
-      border: 1px solid var(--border);
-      padding: 25px;
-      border-radius: 16px;
-    }
+.module-box p{
+  color:var(--muted);
+  line-height:1.5;
+}
 
-    .module-box h3 {
-      margin-bottom: 10px;
-    }
+.blue-button{
+  background:var(--blue);
+  color:white;
+  border:none;
+  border-radius:9px;
+  padding:12px 18px;
+  cursor:pointer;
+  font-weight:bold;
+}
 
-    .module-box p {
-      color: var(--muted);
-      line-height: 1.5;
-    }
+.blue-button:hover{
+  background:var(--blue2);
+}
 
-    .blue-button {
-      margin-top: 20px;
-      background: var(--blue);
-      color: white;
-      border: none;
-      border-radius: 9px;
-      padding: 12px 20px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+.secondary-button{
+  background:#182230;
+  color:white;
+  border:1px solid var(--border);
+  padding:11px 15px;
+  border-radius:9px;
+  cursor:pointer;
+}
 
-    .blue-button:hover {
-      background: var(--blue2);
-    }
+.secondary-button:hover{
+  border-color:var(--blue);
+}
 
-    /* MOBILE */
+/* AGENDA */
 
-    @media (max-width: 800px) {
+.agenda-layout{
+  display:grid;
+  grid-template-columns:340px 1fr;
+  gap:22px;
+}
 
-      .sidebar {
-        width: 78px;
-        padding: 20px 8px;
-      }
+.calendar-box,
+.schedule-box{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:22px;
+}
 
-      .logo h1 {
-        font-size: 15px;
-      }
+.calendar-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
 
-      .logo p {
-        display: none;
-      }
+.calendar-header button{
+  width:37px;
+  height:37px;
+  border:none;
+  border-radius:9px;
+  background:#182230;
+  color:white;
+  cursor:pointer;
+}
 
-      .menu-button {
-        font-size: 0;
-        text-align: center;
-      }
+.calendar-header button:hover{
+  background:var(--blue);
+}
 
-      .menu-button::first-letter {
-        font-size: 22px;
-      }
+.calendar-title{
+  text-align:center;
+  font-weight:bold;
+  text-transform:capitalize;
+}
 
-      .content {
-        margin-left: 78px;
-        width: calc(100% - 78px);
-        padding: 20px;
-      }
+.weekdays,
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:5px;
+}
 
-      .cards {
-        grid-template-columns: 1fr;
-      }
+.weekdays div{
+  color:var(--muted);
+  text-align:center;
+  font-size:11px;
+  font-weight:bold;
+  padding:8px 0;
+}
 
-      .profile {
-        display: none;
-      }
-    }
+.calendar-day{
+  aspect-ratio:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:9px;
+  cursor:pointer;
+  position:relative;
+  font-size:13px;
+}
 
-  </style>
+.calendar-day:hover{
+  background:#182a40;
+}
+
+.calendar-day.today{
+  border:1px solid var(--blue);
+}
+
+.calendar-day.selected{
+  background:var(--blue);
+  color:white;
+}
+
+.calendar-day.empty{
+  cursor:default;
+}
+
+.calendar-day.has-event::after{
+  content:"";
+  position:absolute;
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:#61adff;
+  bottom:4px;
+}
+
+.calendar-day.selected.has-event::after{
+  background:white;
+}
+
+.today-button{
+  width:100%;
+  margin-top:15px;
+}
+
+/* LADO DIREITO */
+
+.schedule-header{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.schedule-header h3{
+  margin-bottom:4px;
+}
+
+.selected-date{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.agenda-tools{
+  display:grid;
+  grid-template-columns:1fr 190px auto;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.search-input,
+.form-control{
+  width:100%;
+  background:#0b111a;
+  color:white;
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:12px;
+  outline:none;
+}
+
+.search-input:focus,
+.form-control:focus{
+  border-color:var(--blue);
+}
+
+select.form-control{
+  cursor:pointer;
+}
+
+.appointment-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.appointment{
+  display:grid;
+  grid-template-columns:75px 1fr auto;
+  align-items:center;
+  gap:15px;
+  background:#0c121c;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:16px;
+}
+
+.appointment:hover{
+  border-color:#2d4868;
+}
+
+.appointment-time{
+  font-size:18px;
+  color:#62aaff;
+  font-weight:bold;
+}
+
+.patient-name{
+  font-size:16px;
+  font-weight:bold;
+  margin-bottom:6px;
+}
+
+.patient-info{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5;
+}
+
+.status{
+  display:inline-block;
+  margin-top:7px;
+  padding:5px 8px;
+  border-radius:20px;
+  font-size:11px;
+}
+
+.status.agendado{
+  background:#142d4e;
+  color:#75baff;
+}
+
+.status.confirmado{
+  background:#17382a;
+  color:#62e09b;
+}
+
+.status.atendido{
+  background:#2d2646;
+  color:#b8a6ff;
+}
+
+.status.cancelado{
+  background:#421d24;
+  color:#ff8c96;
+}
+
+.actions{
+  display:flex;
+  gap:7px;
+}
+
+.action-btn{
+  border:1px solid var(--border);
+  background:#151e2b;
+  color:white;
+  border-radius:8px;
+  padding:8px 10px;
+  cursor:pointer;
+}
+
+.action-btn:hover{
+  border-color:var(--blue);
+}
+
+.action-btn.delete:hover{
+  border-color:var(--danger);
+  color:#ff7b84;
+}
+
+.empty-agenda{
+  text-align:center;
+  color:var(--muted);
+  padding:50px 20px;
+  border:1px dashed var(--border);
+  border-radius:12px;
+}
+
+/* MODAL */
+
+.modal-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  z-index:100;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal-overlay.active{
+  display:flex;
+}
+
+.modal{
+  width:100%;
+  max-width:680px;
+  max-height:90vh;
+  overflow-y:auto;
+  background:#0e151f;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:25px;
+}
+
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:22px;
+}
+
+.close-modal{
+  background:none;
+  border:none;
+  color:var(--muted);
+  font-size:25px;
+  cursor:pointer;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.form-group{
+  margin-bottom:15px;
+}
+
+.form-group.full{
+  grid-column:1 / -1;
+}
+
+.form-group label{
+  display:block;
+  font-size:12px;
+  color:#aab6c5;
+  margin-bottom:7px;
+}
+
+textarea.form-control{
+  resize:vertical;
+  min-height:85px;
+}
+
+.modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:10px;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  background:#152233;
+  border:1px solid #294564;
+  padding:14px 18px;
+  border-radius:10px;
+  z-index:200;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(15px);
+  transition:.25s;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* MOBILE */
+
+@media(max-width:1000px){
+  .agenda-layout{
+    grid-template-columns:1fr;
+  }
+
+  .calendar-box{
+    max-width:500px;
+  }
+}
+
+@media(max-width:800px){
+  .sidebar{
+    width:78px;
+    padding:20px 8px;
+  }
+
+  .logo{
+    padding:0;
+  }
+
+  .logo h1{
+    font-size:12px;
+  }
+
+  .logo p{
+    display:none;
+  }
+
+  .menu-button{
+    font-size:0;
+    text-align:center;
+  }
+
+  .menu-button::first-letter{
+    font-size:22px;
+  }
+
+  .content{
+    margin-left:78px;
+    width:calc(100% - 78px);
+    padding:18px;
+  }
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .profile{
+    display:none;
+  }
+
+  .agenda-tools{
+    grid-template-columns:1fr;
+  }
+
+  .schedule-header{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .appointment{
+    grid-template-columns:60px 1fr;
+  }
+
+  .actions{
+    grid-column:1 / -1;
+    justify-content:flex-end;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+}
+
+/* IMPRESSÃO */
+
+@media print{
+  body{
+    background:white;
+    color:black;
+  }
+
+  .sidebar,
+  .topbar,
+  .calendar-box,
+  .agenda-tools,
+  .schedule-header button,
+  .actions{
+    display:none !important;
+  }
+
+  .content{
+    margin:0;
+    width:100%;
+    padding:0;
+  }
+
+  .screen{
+    display:none !important;
+  }
+
+  #agenda{
+    display:block !important;
+  }
+
+  .agenda-layout{
+    display:block;
+  }
+
+  .schedule-box{
+    border:none;
+    background:white;
+    color:black;
+  }
+
+  .appointment{
+    background:white;
+    color:black;
+    border:1px solid #bbb;
+    break-inside:avoid;
+  }
+
+  .patient-info,
+  .selected-date{
+    color:#444;
+  }
+
+  .appointment-time{
+    color:black;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <div class="app">
 
-  <!-- MENU -->
+<aside class="sidebar">
 
-  <aside class="sidebar">
+  <div class="logo">
+    <h1>ODONTO<span>SMART</span></h1>
+    <p>Gestão Clínica Inteligente</p>
+  </div>
 
-    <div class="logo">
-      <h1>ODONTO<span>SMART</span></h1>
-      <p>Gestão Clínica Inteligente</p>
+  <button class="menu-button active"
+    onclick="openScreen('home',this)">
+    🏠 Início
+  </button>
+
+  <button class="menu-button"
+    onclick="openScreen('agenda',this)">
+    📅 Agenda
+  </button>
+
+  <button class="menu-button"
+    onclick="openScreen('prontuario',this)">
+    🦷 Prontuário Inteligente
+  </button>
+
+  <button class="menu-button"
+    onclick="openScreen('receitas',this)">
+    📄 Receitas e Atestados
+  </button>
+
+  <button class="menu-button"
+    onclick="openScreen('caixa',this)">
+    💰 Livro Caixa
+  </button>
+
+</aside>
+
+
+<main class="content">
+
+<div class="topbar">
+  <div>
+    <h2 id="pageTitle">Visão Geral</h2>
+    <p>Sistema de gestão odontológica</p>
+  </div>
+
+  <div class="profile">
+    👨‍⚕️ Profissional
+  </div>
+</div>
+
+
+<!-- HOME -->
+
+<section id="home" class="screen active">
+
+  <div class="welcome">
+    <h3>Sua clínica em um único lugar.</h3>
+
+    <p>
+      Agenda, prontuários, prescrições,
+      documentos e controle financeiro
+      integrados em uma plataforma preparada
+      para evoluir para PWA.
+    </p>
+  </div>
+
+  <div class="cards">
+
+    <div class="card"
+      onclick="openScreen('agenda')">
+      <div class="icon">📅</div>
+      <h3>Agenda</h3>
+      <p>
+        Organize pacientes, profissionais,
+        especialidades e procedimentos.
+      </p>
+      <span class="tag">Abrir agenda →</span>
+    </div>
+
+    <div class="card"
+      onclick="openScreen('prontuario')">
+      <div class="icon">🦷</div>
+      <h3>Prontuário Inteligente</h3>
+      <p>
+        Cadastro, anamnese, procedimentos,
+        pagamentos e evolução clínica.
+      </p>
+      <span class="tag">Abrir prontuário →</span>
+    </div>
+
+    <div class="card"
+      onclick="openScreen('receitas')">
+      <div class="icon">Rx</div>
+      <h3>Receitas e Documentos</h3>
+      <p>
+        Prescrições inteligentes,
+        atestados e impressão.
+      </p>
+      <span class="tag">Criar documento →</span>
+    </div>
+
+    <div class="card"
+      onclick="openScreen('caixa')">
+      <div class="icon">R$</div>
+      <h3>Livro Caixa</h3>
+      <p>
+        Entradas, despesas,
+        pagamentos e relatórios.
+      </p>
+      <span class="tag">Abrir financeiro →</span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- AGENDA -->
+
+<section id="agenda" class="screen">
+
+<div class="agenda-layout">
+
+  <div class="calendar-box">
+
+    <div class="calendar-header">
+      <button onclick="changeMonth(-1)">‹</button>
+
+      <div class="calendar-title"
+        id="calendarTitle">
+      </div>
+
+      <button onclick="changeMonth(1)">›</button>
+    </div>
+
+    <div class="weekdays">
+      <div>DOM</div>
+      <div>SEG</div>
+      <div>TER</div>
+      <div>QUA</div>
+      <div>QUI</div>
+      <div>SEX</div>
+      <div>SÁB</div>
+    </div>
+
+    <div id="calendarGrid"
+      class="calendar-grid">
     </div>
 
     <button
-      class="menu-button active"
-      onclick="openScreen('home', this)">
-      🏠 Início
+      class="secondary-button today-button"
+      onclick="goToday()">
+      Hoje
     </button>
 
-    <button
-      class="menu-button"
-      onclick="openScreen('agenda', this)">
-      📅 Agenda
-    </button>
-
-    <button
-      class="menu-button"
-      onclick="openScreen('prontuario', this)">
-      🦷 Prontuário Inteligente
-    </button>
-
-    <button
-      class="menu-button"
-      onclick="openScreen('receitas', this)">
-      📄 Receitas e Atestados
-    </button>
-
-    <button
-      class="menu-button"
-      onclick="openScreen('caixa', this)">
-      💰 Livro Caixa
-    </button>
-
-  </aside>
+  </div>
 
 
-  <!-- CONTEÚDO -->
+  <div class="schedule-box">
 
-  <main class="content">
-
-    <div class="topbar">
+    <div class="schedule-header">
 
       <div>
-        <h2 id="pageTitle">
-          Visão Geral
-        </h2>
-
-        <p>
-          Sistema de gestão odontológica
-        </p>
+        <h3>Agenda do dia</h3>
+        <div id="selectedDateText"
+          class="selected-date">
+        </div>
       </div>
 
-      <div class="profile">
-        👨‍⚕️ Profissional
+      <div>
+        <button
+          class="secondary-button"
+          onclick="window.print()">
+          🖨 Imprimir
+        </button>
+
+        <button
+          class="blue-button"
+          onclick="openAppointmentModal()">
+          + Novo agendamento
+        </button>
       </div>
 
     </div>
 
 
-    <!-- HOME -->
+    <div class="agenda-tools">
 
-    <section
-      id="home"
-      class="screen active">
+      <input
+        id="searchPatient"
+        class="search-input"
+        type="search"
+        placeholder="🔎 Buscar paciente ou telefone..."
+        oninput="renderAppointments()">
 
-      <div class="welcome">
+      <select
+        id="professionalFilter"
+        class="form-control"
+        onchange="renderAppointments()">
 
-        <h3>
-          Sua clínica em um único lugar.
-        </h3>
+        <option value="">
+          Todos os profissionais
+        </option>
 
-        <p>
-          Agenda, prontuários, prescrições,
-          documentos e controle financeiro
-          integrados em uma plataforma
-          preparada para evoluir para PWA.
-        </p>
+      </select>
 
+      <select
+        id="statusFilter"
+        class="form-control"
+        onchange="renderAppointments()">
+
+        <option value="">Todos os status</option>
+        <option value="Agendado">Agendado</option>
+        <option value="Confirmado">Confirmado</option>
+        <option value="Atendido">Atendido</option>
+        <option value="Cancelado">Cancelado</option>
+
+      </select>
+
+    </div>
+
+    <div id="appointmentList"
+      class="appointment-list">
+    </div>
+
+  </div>
+
+</div>
+</section>
+
+
+<!-- PRONTUÁRIO -->
+
+<section id="prontuario" class="screen">
+  <div class="module-box">
+    <h3>🦷 Prontuário Inteligente</h3>
+
+    <p>
+      O próximo módulo será conectado
+      aos pacientes cadastrados na agenda.
+    </p>
+
+    <br>
+
+    <button class="blue-button">
+      + Novo paciente
+    </button>
+  </div>
+</section>
+
+
+<!-- RECEITAS -->
+
+<section id="receitas" class="screen">
+  <div class="module-box">
+    <h3>📄 Receitas e Atestados</h3>
+
+    <p>
+      Prescrição odontológica automatizada
+      e geração de documentos clínicos.
+    </p>
+
+    <br>
+
+    <button class="blue-button">
+      + Nova receita
+    </button>
+  </div>
+</section>
+
+
+<!-- CAIXA -->
+
+<section id="caixa" class="screen">
+  <div class="module-box">
+    <h3>💰 Livro Caixa</h3>
+
+    <p>
+      Controle de receitas,
+      despesas e movimentação financeira.
+    </p>
+
+    <br>
+
+    <button class="blue-button">
+      + Nova movimentação
+    </button>
+  </div>
+</section>
+
+</main>
+</div>
+
+
+<!-- MODAL AGENDAMENTO -->
+
+<div id="appointmentModal"
+  class="modal-overlay">
+
+<div class="modal">
+
+  <div class="modal-header">
+    <h3 id="modalTitle">
+      Novo agendamento
+    </h3>
+
+    <button
+      class="close-modal"
+      onclick="closeAppointmentModal()">
+      ×
+    </button>
+  </div>
+
+
+  <form id="appointmentForm">
+
+    <input type="hidden" id="appointmentId">
+
+    <div class="form-grid">
+
+      <div class="form-group full">
+        <label>Nome do paciente *</label>
+        <input
+          id="patientName"
+          class="form-control"
+          required
+          placeholder="Nome completo">
       </div>
 
 
-      <div class="cards">
-
-        <div
-          class="card"
-          onclick="openScreen('agenda')">
-
-          <div class="icon">📅</div>
-
-          <h3>Agenda</h3>
-
-          <p>
-            Organize os pacientes do dia,
-            profissionais, especialidades
-            e procedimentos programados.
-          </p>
-
-          <span class="tag">
-            Abrir agenda →
-          </span>
-
-        </div>
-
-
-        <div
-          class="card"
-          onclick="openScreen('prontuario')">
-
-          <div class="icon">🦷</div>
-
-          <h3>Prontuário Inteligente</h3>
-
-          <p>
-            Cadastro, anamnese,
-            histórico odontológico,
-            procedimentos, pagamentos
-            e assinaturas.
-          </p>
-
-          <span class="tag">
-            Abrir prontuário →
-          </span>
-
-        </div>
-
-
-        <div
-          class="card"
-          onclick="openScreen('receitas')">
-
-          <div class="icon">Rx</div>
-
-          <h3>Receitas e Documentos</h3>
-
-          <p>
-            Prescrições inteligentes,
-            medicamentos cadastrados,
-            atestados e impressão.
-          </p>
-
-          <span class="tag">
-            Criar documento →
-          </span>
-
-        </div>
-
-
-        <div
-          class="card"
-          onclick="openScreen('caixa')">
-
-          <div class="icon">R$</div>
-
-          <h3>Livro Caixa</h3>
-
-          <p>
-            Entradas, despesas,
-            formas de pagamento,
-            movimentações e relatórios.
-          </p>
-
-          <span class="tag">
-            Abrir financeiro →
-          </span>
-
-        </div>
-
+      <div class="form-group">
+        <label>Telefone</label>
+        <input
+          id="patientPhone"
+          class="form-control"
+          placeholder="(91) 99999-9999">
       </div>
 
-    </section>
 
-
-    <!-- AGENDA -->
-
-    <section
-      id="agenda"
-      class="screen">
-
-      <div class="module-box">
-
-        <h3>📅 Agenda Clínica</h3>
-
-        <p>
-          Aqui ficará a agenda diária
-          dos pacientes e profissionais.
-        </p>
-
-        <button class="blue-button">
-          + Novo agendamento
-        </button>
-
+      <div class="form-group">
+        <label>Data *</label>
+        <input
+          id="appointmentDate"
+          type="date"
+          class="form-control"
+          required>
       </div>
 
-    </section>
 
-
-    <!-- PRONTUÁRIO -->
-
-    <section
-      id="prontuario"
-      class="screen">
-
-      <div class="module-box">
-
-        <h3>
-          🦷 Prontuário Inteligente
-        </h3>
-
-        <p>
-          Cadastro de pacientes,
-          anamnese, procedimentos,
-          evolução clínica, pagamentos
-          e assinaturas.
-        </p>
-
-        <button class="blue-button">
-          + Novo paciente
-        </button>
-
+      <div class="form-group">
+        <label>Horário *</label>
+        <input
+          id="appointmentTime"
+          type="time"
+          class="form-control"
+          required>
       </div>
 
-    </section>
 
-
-    <!-- RECEITAS -->
-
-    <section
-      id="receitas"
-      class="screen">
-
-      <div class="module-box">
-
-        <h3>
-          📄 Receitas e Atestados
-        </h3>
-
-        <p>
-          Prescrição odontológica
-          automatizada e geração
-          de documentos clínicos.
-        </p>
-
-        <button class="blue-button">
-          + Nova receita
-        </button>
-
+      <div class="form-group">
+        <label>Profissional *</label>
+        <input
+          id="professional"
+          class="form-control"
+          required
+          placeholder="Ex.: Dr. Orlando">
       </div>
 
-    </section>
 
+      <div class="form-group">
+        <label>Especialidade</label>
 
-    <!-- CAIXA -->
+        <select
+          id="specialty"
+          class="form-control">
 
-    <section
-      id="caixa"
-      class="screen">
+          <option value="">
+            Selecione
+          </option>
 
-      <div class="module-box">
+          <option>Clínica Geral</option>
+          <option>Implantodontia</option>
+          <option>Cirurgia</option>
+          <option>Ortodontia</option>
+          <option>Endodontia</option>
+          <option>Periodontia</option>
+          <option>Prótese Dentária</option>
+          <option>Odontopediatria</option>
+          <option>Estética</option>
 
-        <h3>
-          💰 Livro Caixa
-        </h3>
-
-        <p>
-          Controle de receitas,
-          despesas e movimentação
-          financeira da clínica.
-        </p>
-
-        <button class="blue-button">
-          + Nova movimentação
-        </button>
-
+        </select>
       </div>
 
-    </section>
 
-  </main>
+      <div class="form-group">
+        <label>Procedimento</label>
+        <input
+          id="procedure"
+          class="form-control"
+          placeholder="Ex.: Avaliação">
+      </div>
 
+
+      <div class="form-group">
+        <label>Status</label>
+
+        <select
+          id="appointmentStatus"
+          class="form-control">
+
+          <option>Agendado</option>
+          <option>Confirmado</option>
+          <option>Atendido</option>
+          <option>Cancelado</option>
+
+        </select>
+      </div>
+
+
+      <div class="form-group full">
+        <label>Observações</label>
+
+        <textarea
+          id="appointmentNotes"
+          class="form-control"
+          placeholder="Informações adicionais...">
+        </textarea>
+      </div>
+
+    </div>
+
+
+    <div class="modal-actions">
+
+      <button
+        type="button"
+        class="secondary-button"
+        onclick="closeAppointmentModal()">
+        Cancelar
+      </button>
+
+      <button
+        type="submit"
+        class="blue-button">
+        Salvar agendamento
+      </button>
+
+    </div>
+
+  </form>
+</div>
+</div>
+
+
+<div id="toast" class="toast">
+  Agendamento salvo.
 </div>
 
 
 <script>
 
-function openScreen(screenId, button) {
+/* =========================
+   BANCO LOCAL
+========================= */
 
-  const screens =
-    document.querySelectorAll(".screen");
+const STORAGE_KEY = "odontoSmartAppointments";
 
-  screens.forEach(screen => {
-    screen.classList.remove("active");
-  });
+let appointments =
+  JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+let selectedDate = new Date();
+
+let calendarDate =
+  new Date(
+    selectedDate.getFullYear(),
+    selectedDate.getMonth(),
+    1
+  );
+
+
+/* =========================
+   TELAS
+========================= */
+
+function openScreen(screenId, button){
+
+  document
+    .querySelectorAll(".screen")
+    .forEach(screen =>
+      screen.classList.remove("active")
+    );
 
   document
     .getElementById(screenId)
     .classList.add("active");
 
 
-  const buttons =
-    document.querySelectorAll(".menu-button");
+  document
+    .querySelectorAll(".menu-button")
+    .forEach(btn =>
+      btn.classList.remove("active")
+    );
 
-  buttons.forEach(btn => {
-    btn.classList.remove("active");
-  });
 
-
-  if (button) {
+  if(button){
     button.classList.add("active");
+  }else{
+
+    const menuButtons =
+      document.querySelectorAll(".menu-button");
+
+    const ids = [
+      "home",
+      "agenda",
+      "prontuario",
+      "receitas",
+      "caixa"
+    ];
+
+    const index = ids.indexOf(screenId);
+
+    if(index >= 0){
+      menuButtons[index]
+        .classList.add("active");
+    }
   }
 
 
   const titles = {
-    home: "Visão Geral",
-    agenda: "Agenda",
-    prontuario: "Prontuário Inteligente",
-    receitas: "Receitas e Atestados",
-    caixa: "Livro Caixa"
+    home:"Visão Geral",
+    agenda:"Agenda",
+    prontuario:"Prontuário Inteligente",
+    receitas:"Receitas e Atestados",
+    caixa:"Livro Caixa"
   };
 
   document.getElementById(
     "pageTitle"
   ).innerText = titles[screenId];
 
+
+  if(screenId === "agenda"){
+    renderCalendar();
+    renderAppointments();
+  }
 }
+
+
+/* =========================
+   DATAS
+========================= */
+
+function dateKey(date){
+
+  const year = date.getFullYear();
+
+  const month =
+    String(date.getMonth()+1)
+      .padStart(2,"0");
+
+  const day =
+    String(date.getDate())
+      .padStart(2,"0");
+
+  return `${year}-${month}-${day}`;
+}
+
+
+function formatDate(date){
+
+  return date.toLocaleDateString(
+    "pt-BR",
+    {
+      weekday:"long",
+      day:"2-digit",
+      month:"long",
+      year:"numeric"
+    }
+  );
+}
+
+
+/* =========================
+   CALENDÁRIO
+========================= */
+
+function renderCalendar(){
+
+  const title =
+    document.getElementById("calendarTitle");
+
+  title.innerText =
+    calendarDate.toLocaleDateString(
+      "pt-BR",
+      {
+        month:"long",
+        year:"numeric"
+      }
+    );
+
+
+  const grid =
+    document.getElementById("calendarGrid");
+
+  grid.innerHTML = "";
+
+
+  const year =
+    calendarDate.getFullYear();
+
+  const month =
+    calendarDate.getMonth();
+
+  const firstDay =
+    new Date(year,month,1).getDay();
+
+  const totalDays =
+    new Date(year,month+1,0).getDate();
+
+
+  for(let i=0;i<firstDay;i++){
+
+    const empty =
+      document.createElement("div");
+
+    empty.className =
+      "calendar-day empty";
+
+    grid.appendChild(empty);
+  }
+
+
+  const today =
+    new Date();
+
+
+  for(let day=1;day<=totalDays;day++){
+
+    const date =
+      new Date(year,month,day);
+
+    const element =
+      document.createElement("div");
+
+    element.className =
+      "calendar-day";
+
+    element.innerText = day;
+
+
+    if(
+      dateKey(date) ===
+      dateKey(today)
+    ){
+      element.classList.add("today");
+    }
+
+
+    if(
+      dateKey(date) ===
+      dateKey(selectedDate)
+    ){
+      element.classList.add("selected");
+    }
+
+
+    const hasAppointment =
+      appointments.some(
+        item =>
+          item.date === dateKey(date)
+      );
+
+    if(hasAppointment){
+      element.classList.add("has-event");
+    }
+
+
+    element.onclick = () => {
+
+      selectedDate =
+        new Date(year,month,day);
+
+      renderCalendar();
+      renderAppointments();
+    };
+
+
+    grid.appendChild(element);
+  }
+
+
+  document.getElementById(
+    "selectedDateText"
+  ).innerText = formatDate(selectedDate);
+}
+
+
+function changeMonth(direction){
+
+  calendarDate =
+    new Date(
+      calendarDate.getFullYear(),
+      calendarDate.getMonth()+direction,
+      1
+    );
+
+  renderCalendar();
+}
+
+
+function goToday(){
+
+  selectedDate = new Date();
+
+  calendarDate =
+    new Date(
+      selectedDate.getFullYear(),
+      selectedDate.getMonth(),
+      1
+    );
+
+  renderCalendar();
+  renderAppointments();
+}
+
+
+/* =========================
+   AGENDA DO DIA
+========================= */
+
+function renderAppointments(){
+
+  const list =
+    document.getElementById(
+      "appointmentList"
+    );
+
+  const search =
+    document.getElementById(
+      "searchPatient"
+    ).value.toLowerCase().trim();
+
+  const professional =
+    document.getElementById(
+      "professionalFilter"
+    ).value;
+
+  const status =
+    document.getElementById(
+      "statusFilter"
+    ).value;
+
+
+  const selectedKey =
+    dateKey(selectedDate);
+
+
+  let dayAppointments =
+    appointments
+      .filter(item =>
+        item.date === selectedKey
+      )
+      .filter(item => {
+
+        const text =
+          `${item.patientName} ${item.phone}`
+            .toLowerCase();
+
+        return text.includes(search);
+
+      })
+      .filter(item =>
+        !professional ||
+        item.professional === professional
+      )
+      .filter(item =>
+        !status ||
+        item.status === status
+      )
+      .sort((a,b) =>
+        a.time.localeCompare(b.time)
+      );
+
+
+  document.getElementById(
+    "selectedDateText"
+  ).innerText =
+    formatDate(selectedDate);
+
+
+  if(dayAppointments.length === 0){
+
+    list.innerHTML = `
+      <div class="empty-agenda">
+        <div style="font-size:35px;margin-bottom:10px">
+          📅
+        </div>
+
+        Nenhum atendimento encontrado
+        para esta data.
+      </div>
+    `;
+
+    updateProfessionalFilter();
+
+    return;
+  }
+
+
+  list.innerHTML =
+    dayAppointments
+      .map(item => {
+
+        const statusClass =
+          item.status.toLowerCase();
+
+        return `
+          <div class="appointment">
+
+            <div class="appointment-time">
+              ${escapeHTML(item.time)}
+            </div>
+
+            <div>
+
+              <div class="patient-name">
+                ${escapeHTML(item.patientName)}
+              </div>
+
+              <div class="patient-info">
+
+                ${item.phone
+                  ? "📞 " +
+                    escapeHTML(item.phone) +
+                    "<br>"
+                  : ""
+                }
+
+                👨‍⚕️
+                ${escapeHTML(item.professional)}
+
+                ${item.specialty
+                  ? " • " +
+                    escapeHTML(item.specialty)
+                  : ""
+                }
+
+                ${item.procedure
+                  ? "<br>🦷 " +
+                    escapeHTML(item.procedure)
+                  : ""
+                }
+
+              </div>
+
+              <span class="status ${statusClass}">
+                ${escapeHTML(item.status)}
+              </span>
+
+            </div>
+
+            <div class="actions">
+
+              <button
+                class="action-btn"
+                onclick="editAppointment('${item.id}')"
+                title="Editar">
+                ✏️
+              </button>
+
+              <button
+                class="action-btn delete"
+                onclick="deleteAppointment('${item.id}')"
+                title="Excluir">
+                🗑️
+              </button>
+
+            </div>
+
+          </div>
+        `;
+
+      }).join("");
+
+
+  updateProfessionalFilter();
+}
+
+
+/* =========================
+   PROFISSIONAIS
+========================= */
+
+function updateProfessionalFilter(){
+
+  const select =
+    document.getElementById(
+      "professionalFilter"
+    );
+
+  const current =
+    select.value;
+
+
+  const professionals =
+    [
+      ...new Set(
+        appointments
+          .map(item => item.professional)
+          .filter(Boolean)
+      )
+    ].sort();
+
+
+  select.innerHTML =
+    `<option value="">
+      Todos os profissionais
+     </option>`;
+
+
+  professionals.forEach(name => {
+
+    const option =
+      document.createElement("option");
+
+    option.value = name;
+    option.innerText = name;
+
+    select.appendChild(option);
+  });
+
+
+  if(professionals.includes(current)){
+    select.value = current;
+  }
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+function openAppointmentModal(){
+
+  document
+    .getElementById("appointmentForm")
+    .reset();
+
+  document.getElementById(
+    "appointmentId"
+  ).value = "";
+
+  document.getElementById(
+    "appointmentDate"
+  ).value =
+    dateKey(selectedDate);
+
+  document.getElementById(
+    "appointmentStatus"
+  ).value =
+    "Agendado";
+
+  document.getElementById(
+    "modalTitle"
+  ).innerText =
+    "Novo agendamento";
+
+  document.getElementById(
+    "appointmentModal"
+  ).classList.add("active");
+}
+
+
+function closeAppointmentModal(){
+
+  document.getElementById(
+    "appointmentModal"
+  ).classList.remove("active");
+}
+
+
+/* =========================
+   SALVAR
+========================= */
+
+document.getElementById(
+  "appointmentForm"
+).addEventListener(
+  "submit",
+  function(event){
+
+    event.preventDefault();
+
+
+    const id =
+      document.getElementById(
+        "appointmentId"
+      ).value;
+
+
+    const appointment = {
+
+      id:
+        id ||
+        (
+          window.crypto &&
+          crypto.randomUUID
+            ? crypto.randomUUID()
+            : Date.now().toString()
+        ),
+
+      patientId:
+        id
+          ? (
+              appointments.find(
+                item => item.id === id
+              )?.patientId
+              || "PAT-" + Date.now()
+            )
+          : "PAT-" + Date.now(),
+
+      patientName:
+        document.getElementById(
+          "patientName"
+        ).value.trim(),
+
+      phone:
+        document.getElementById(
+          "patientPhone"
+        ).value.trim(),
+
+      date:
+        document.getElementById(
+          "appointmentDate"
+        ).value,
+
+      time:
+        document.getElementById(
+          "appointmentTime"
+        ).value,
+
+      professional:
+        document.getElementById(
+          "professional"
+        ).value.trim(),
+
+      specialty:
+        document.getElementById(
+          "specialty"
+        ).value,
+
+      procedure:
+        document.getElementById(
+          "procedure"
+        ).value.trim(),
+
+      status:
+        document.getElementById(
+          "appointmentStatus"
+        ).value,
+
+      notes:
+        document.getElementById(
+          "appointmentNotes"
+        ).value.trim()
+    };
+
+
+    if(id){
+
+      const index =
+        appointments.findIndex(
+          item => item.id === id
+        );
+
+      appointments[index] =
+        appointment;
+
+    }else{
+
+      appointments.push(
+        appointment
+      );
+    }
+
+
+    saveAppointments();
+
+
+    const parts =
+      appointment.date
+        .split("-")
+        .map(Number);
+
+    selectedDate =
+      new Date(
+        parts[0],
+        parts[1]-1,
+        parts[2]
+      );
+
+    calendarDate =
+      new Date(
+        parts[0],
+        parts[1]-1,
+        1
+      );
+
+
+    closeAppointmentModal();
+
+    renderCalendar();
+    renderAppointments();
+
+    showToast(
+      id
+        ? "Agendamento atualizado."
+        : "Agendamento salvo."
+    );
+  }
+);
+
+
+/* =========================
+   EDITAR
+========================= */
+
+function editAppointment(id){
+
+  const item =
+    appointments.find(
+      appointment =>
+        appointment.id === id
+    );
+
+  if(!item) return;
+
+
+  document.getElementById(
+    "appointmentId"
+  ).value = item.id;
+
+  document.getElementById(
+    "patientName"
+  ).value = item.patientName;
+
+  document.getElementById(
+    "patientPhone"
+  ).value = item.phone || "";
+
+  document.getElementById(
+    "appointmentDate"
+  ).value = item.date;
+
+  document.getElementById(
+    "appointmentTime"
+  ).value = item.time;
+
+  document.getElementById(
+    "professional"
+  ).value = item.professional;
+
+  document.getElementById(
+    "specialty"
+  ).value = item.specialty || "";
+
+  document.getElementById(
+    "procedure"
+  ).value = item.procedure || "";
+
+  document.getElementById(
+    "appointmentStatus"
+  ).value = item.status;
+
+  document.getElementById(
+    "appointmentNotes"
+  ).value = item.notes || "";
+
+
+  document.getElementById(
+    "modalTitle"
+  ).innerText =
+    "Editar agendamento";
+
+
+  document.getElementById(
+    "appointmentModal"
+  ).classList.add("active");
+}
+
+
+/* =========================
+   EXCLUIR
+========================= */
+
+function deleteAppointment(id){
+
+  const item =
+    appointments.find(
+      appointment =>
+        appointment.id === id
+    );
+
+  if(!item) return;
+
+
+  const confirmed =
+    confirm(
+      `Excluir o agendamento de ${item.patientName}?`
+    );
+
+  if(!confirmed) return;
+
+
+  appointments =
+    appointments.filter(
+      appointment =>
+        appointment.id !== id
+    );
+
+
+  saveAppointments();
+
+  renderCalendar();
+  renderAppointments();
+
+  showToast(
+    "Agendamento excluído."
+  );
+}
+
+
+/* =========================
+   STORAGE
+========================= */
+
+function saveAppointments(){
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(appointments)
+  );
+}
+
+
+/* =========================
+   SEGURANÇA HTML
+========================= */
+
+function escapeHTML(value){
+
+  const div =
+    document.createElement("div");
+
+  div.textContent =
+    value == null ? "" : value;
+
+  return div.innerHTML;
+}
+
+
+/* =========================
+   AVISO
+========================= */
+
+function showToast(message){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.innerText = message;
+
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  },2200);
+}
+
+
+/* =========================
+   FECHAR MODAL
+========================= */
+
+document.getElementById(
+  "appointmentModal"
+).addEventListener(
+  "click",
+  function(event){
+
+    if(event.target === this){
+      closeAppointmentModal();
+    }
+  }
+);
+
+
+/* =========================
+   INICIALIZAÇÃO
+========================= */
+
+renderCalendar();
+renderAppointments();
 
 </script>
 
